@@ -18,7 +18,7 @@
  * @author vlads
  * @version $Id$
  */
-package com.github.wvengen.maven.proguard;
+package com.github.nobody.maven.proguard;
 
 import org.apache.maven.artifact.Artifact;
 

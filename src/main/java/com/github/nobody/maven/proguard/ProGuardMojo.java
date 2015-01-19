@@ -18,7 +18,7 @@
  * @author vlads
  * @version $Id$
  */
-package com.github.wvengen.maven.proguard;
+package com.github.nobody.maven.proguard;
 
 import org.apache.maven.archiver.MavenArchiveConfiguration;
 import org.apache.maven.archiver.MavenArchiver;
@@ -454,7 +454,7 @@ public class ProGuardMojo extends AbstractMojo {
 			args.add("-outjars");
 			args.add(fileToString(outJarFile));
 		}
-
+		
 		if (!obfuscate) {
 			args.add("-dontobfuscate");
 		}
@@ -489,7 +489,18 @@ public class ProGuardMojo extends AbstractMojo {
 
 		if (options != null) {
 			for (int i = 0; i < options.length; i++) {
-				args.add(options[i]);
+				String option = options[i];
+				if (option.startsWith("-applymapping") || 
+					option.startsWith("-flattenpackagehierarchy") || 
+					option.startsWith("-obfuscationdictionary") || 
+					option.startsWith("-classobfuscationdictionary") || 
+					option.startsWith("-packageobfuscationdictionary")) {
+					String[] parts = option.split(" ");
+					args.add(parts[0]);
+					args.add(parts[1]);
+				} else {
+					args.add(option);
+				}
 			}
 		}
 
@@ -555,13 +566,13 @@ public class ProGuardMojo extends AbstractMojo {
 	private static File getProguardJar(ProGuardMojo mojo) throws MojoExecutionException {
 
 		Artifact proguardArtifact = null;
-		int proguardArtifactDistance = -1;
+		int proguardArtifactDistance = 10;
 		// This should be solved in Maven 2.1
 		for (Iterator i = mojo.pluginArtifacts.iterator(); i.hasNext();) {
 			Artifact artifact = (Artifact) i.next();
 			mojo.getLog().debug("pluginArtifact: " + artifact.getFile());
 			if (artifact.getArtifactId().startsWith("proguard") &&
-			   !artifact.getArtifactId().startsWith("proguard-maven-plugin")) {
+			   !artifact.getArtifactId().startsWith("proguard-nobody")) {
 				int distance = artifact.getDependencyTrail().size();
 				mojo.getLog().debug("proguard DependencyTrail: " + distance);
 				if ((mojo.proguardVersion != null) && (mojo.proguardVersion.equals(artifact.getVersion()))) {

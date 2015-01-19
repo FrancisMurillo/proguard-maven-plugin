@@ -18,12 +18,8 @@
  * @author vlads
  * @version $Id$
  */
-package com.github.wvengen.maven.proguard;
+package com.github.nobody.maven.proguard;
 
-import java.util.List;
-
-public class Assembly {
-
-	protected List inclusions;
+public class Exclusion extends ArtifactFilter {
 
 }
