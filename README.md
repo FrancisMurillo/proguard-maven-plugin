@@ -11,14 +11,14 @@ Usage
 
 To use this, just install the plugin by building it with Maven and just change the proguard artifactId and groupID like so instead of ...
 
-```
+```XML
 <groupID>com.github.wvengen</groupID>
 <artifactID>proguard-maven-plugin</artifactID>
 ```
 
 Do...
 
-```
+```XML
 <groupID>com.github.nobody</groupID>
 <artifactID>proguard-nobody</artifactID>
 ```
