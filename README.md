@@ -19,8 +19,8 @@ To use this, just install the plugin by building it with Maven and just change t
 Do...
 
 ```XML
-<groupID>com.github.nobody</groupID>
-<artifactID>proguard-nobody</artifactID>
+<groupId>com.github.nobody</groupId>
+<artifactId>proguard-nobody</artifactId>
 ```
 
 And you're good to go. 
